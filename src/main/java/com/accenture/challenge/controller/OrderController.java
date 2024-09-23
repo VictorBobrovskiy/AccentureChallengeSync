@@ -102,7 +102,7 @@ public class OrderController {
             @ApiResponse(responseCode = "500", description = "Error interno del servidor")
     })
     public ResponseEntity<List<OrderDto>> getAllOrders() {
-        log.info("Recuperando todos los pedidos...");
+        log.debug("Recuperando todos los pedidos...");
 
         List<Order> orders = orderService.getAllOrders();
 
@@ -121,7 +121,7 @@ public class OrderController {
                 .map(OrderMapper::toDto)
                 .collect(Collectors.toList());
 
-        log.info("Pedidos recuperados exitosamente.");
+        log.debug("Pedidos recuperados exitosamente.");
         return new ResponseEntity<>(orderDtos, HttpStatus.OK);
     }
 }

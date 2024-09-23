@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableCaching
-@EnableJpaRepositories(basePackages = "com.accenture.challenge.repository")  // JPA repositories
 public class OrderServiceApplication {
 
     public static void main(String[] args) {

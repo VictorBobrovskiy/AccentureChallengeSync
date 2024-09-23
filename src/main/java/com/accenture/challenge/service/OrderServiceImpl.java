@@ -30,31 +30,37 @@ public class OrderServiceImpl implements OrderService {
     // Crear un grupo de hilos personalizado con un número fijo de hilos
     private final ForkJoinPool forkJoinPool = ForkJoinPool.commonPool();
 
+
     @Override
-    @Transactional
+    @Transactional  // Make sure the transaction covers the synchronous part
     public CompletableFuture<Order> processOrder(Order order) {
+
+        // Save the order and update the status synchronously within the transaction
+        order.setStatus(OrderStatus.RECEIVED);
+
+        log.debug("Guardando la orden con ID: {}", order.getId());
+
+        Order savedOrder = orderRepository.save(order);
+
+        // Set the order ID for each OrderItem
+        for (OrderItem item : order.getOrderItems()) {
+            item.setOrderId(savedOrder.getId());  // Make sure this is correct
+        }
+        orderItemRepository.saveAll(order.getOrderItems());
+
+        // Start the asynchronous processing
         return CompletableFuture.supplyAsync(() -> {
 
-            // Guardar la orden y actualizar el estado
-            order.setStatus(OrderStatus.RECEIVED);
-            log.debug("Guardando la orden con ID: {}", order.getId());
-            Order savedOrder = orderRepository.save(order);
-
-            // Establecer el ID de la orden para cada OrderItem
-            for (OrderItem item : order.getOrderItems()) {
-                item.setOrderId(savedOrder.getId());
-            }
-            orderItemRepository.saveAll(order.getOrderItems());
-
-            // Simular el procesamiento de la orden
+            // Simulate order processing
             orderProcessor.processOrder(savedOrder);
             log.debug("Orden procesada: {}", savedOrder.getId());
 
+            // Save the completed order
             Order completedOrder = orderRepository.save(savedOrder);
             redisTemplate.opsForValue().set(completedOrder.getId().toString(), completedOrder);
             log.debug("Orden completada guardada en Redis con ID: {}", completedOrder.getId());
 
-            // Devolver la orden guardada por ahora; la orden procesada se manejará de forma asíncrona
+            // Return the completed order
             return completedOrder;
         }, forkJoinPool);
     }
@@ -83,7 +89,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(readOnly = true)
-    @Cacheable(value = "orders", key = "'allOrders'")
     public List<Order> getAllOrders() {
 
         log.debug("Obteniendo todas las órdenes");
