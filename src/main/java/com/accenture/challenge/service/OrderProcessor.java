@@ -5,6 +5,7 @@ import com.accenture.challenge.model.Order;
 import com.accenture.challenge.model.OrderStatus;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Random;

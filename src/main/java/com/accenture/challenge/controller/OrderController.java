@@ -1,7 +1,6 @@
 package com.accenture.challenge.controller;
 
 import com.accenture.challenge.dto.OrderDto;
-import com.accenture.challenge.dto.OrderItemDto;
 import com.accenture.challenge.model.Order;
 import com.accenture.challenge.model.OrderItem;
 import com.accenture.challenge.service.OrderService;

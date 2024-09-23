@@ -3,7 +3,6 @@ package com.accenture.challenge;
 import com.accenture.challenge.error.OrderNotFoundException;
 import com.accenture.challenge.model.Order;
 import com.accenture.challenge.model.OrderItem;
-import com.accenture.challenge.model.OrderStatus;
 import com.accenture.challenge.repository.OrderItemRepository;
 import com.accenture.challenge.repository.OrderRepository;
 import com.accenture.challenge.service.OrderProcessor;
@@ -22,9 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -85,7 +84,6 @@ class OrderServiceImplTest {
         // Assert the order is processed correctly
         assertEquals(savedOrder.getId(), order.getId());
     }
-
 
 
     @Test

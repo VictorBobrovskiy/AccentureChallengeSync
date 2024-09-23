@@ -7,7 +7,7 @@ import com.accenture.challenge.model.OrderStatus;
 import com.accenture.challenge.repository.OrderItemRepository;
 import com.accenture.challenge.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j; // Import for logging
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

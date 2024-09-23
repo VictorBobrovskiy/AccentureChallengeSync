@@ -1,6 +1,5 @@
 package com.accenture.challenge.dto;
 
-import com.accenture.challenge.model.OrderItem;
 import com.accenture.challenge.model.OrderStatus;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.annotation.Nullable;

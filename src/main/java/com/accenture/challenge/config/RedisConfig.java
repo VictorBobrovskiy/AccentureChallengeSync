@@ -3,11 +3,11 @@ package com.accenture.challenge.config;
 import com.accenture.challenge.model.Order;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-import lombok.extern.slf4j.Slf4j; // Importar para @Slf4j
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory; // Asegurar importaciones correctas
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -29,7 +29,7 @@ public class RedisConfig {
     LettuceConnectionFactory redisConnectionFactory() {
         log.debug("Creando RedisConnectionFactory para conexión a Redis");
         LettuceConnectionFactory factory = new LettuceConnectionFactory();
-        factory.setHostName("redis"); // replace with your Redis host
+        factory.setHostName("localhost"); // replace with your Redis host
         factory.setPort(6379); // replace with your Redis port if different
         return factory;
     }

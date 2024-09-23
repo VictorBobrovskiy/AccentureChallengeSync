@@ -5,7 +5,7 @@ import com.accenture.challenge.dto.OrderItemDto;
 import com.accenture.challenge.model.Order;
 import com.accenture.challenge.model.OrderItem;
 import lombok.experimental.UtilityClass;
-import lombok.extern.slf4j.Slf4j; // Import for logging
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
