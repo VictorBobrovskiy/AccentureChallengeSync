@@ -29,7 +29,7 @@ public class RedisConfig {
     LettuceConnectionFactory redisConnectionFactory() {
         log.debug("Creando RedisConnectionFactory para conexión a Redis");
         LettuceConnectionFactory factory = new LettuceConnectionFactory();
-        factory.setHostName("localhost"); // replace with your Redis host
+        factory.setHostName("redis"); // replace with your Redis host
         factory.setPort(6379); // replace with your Redis port if different
         return factory;
     }
