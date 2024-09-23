@@ -111,8 +111,14 @@ public class OrderController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
 
+        // Set OrderItems for each Order
+        orders.forEach(order -> {
+            List<OrderItem> orderItems = orderService.getOrderItemsByOrderId(order.getId());
+            order.setOrderItems(orderItems);
+        });
+
         List<OrderDto> orderDtos = orders.stream()
-                .map(OrderMapper::toDto) // Convertir cada Order en OrderDto
+                .map(OrderMapper::toDto)
                 .collect(Collectors.toList());
 
         log.info("Pedidos recuperados exitosamente.");
